@@ -1,0 +1,12 @@
+trigger: none
+# - main
+
+pool: kubernetes-self-hosted-agent
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+  displayName: 'Run a multi-line script'
