@@ -45,3 +45,14 @@ source ~/.bashrc
 azcli
 az version
 ```
+## Install Azure CLI system-wide on the agent VM
+```
+You must NOT rely on venv for Azure DevOps agents
+
+ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+ sudo ./svc.sh stop
+ cd myagent/
+ sudo ./svc.sh stop
+ sudo ./svc.sh start
+ sudo -u ubuntu az version
+```
