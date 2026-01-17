@@ -126,3 +126,7 @@ Your company must store tax records for 7 years. Nobody reads them until audit t
   - Hot → Cool → Archive based on age  
 - **Choose tier based on access pattern** to optimize costs.
 
+## Azure Storage Services
+<img width="1536" height="1024" alt="3f3113ae-8606-4760-9df0-6a5371a8b2c9" src="https://github.com/user-attachments/assets/a0fa82fc-fd36-4fb5-bc23-32336946e42a" />
+
+
