@@ -129,4 +129,11 @@ Your company must store tax records for 7 years. Nobody reads them until audit t
 ## Azure Storage Services
 <img width="1536" height="1024" alt="3f3113ae-8606-4760-9df0-6a5371a8b2c9" src="https://github.com/user-attachments/assets/a0fa82fc-fd36-4fb5-bc23-32336946e42a" />
 
+## AKS
+```
+az aks get-credentials \
+  --resource-group rg-name \
+  --name cluster-name
+
+```
 
