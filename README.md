@@ -56,3 +56,73 @@ You must NOT rely on venv for Azure DevOps agents
  sudo ./svc.sh start
  sudo -u ubuntu az version
 ```
+# Azure Blob Storage Tiers Explained
+
+This README explains the **Hot, Cool, and Archive tiers** in Azure Blob Storage, including cost, use cases, examples, and analogies.
+
+---
+
+## 1️⃣ Hot Tier 🌞
+
+- **Purpose:** Data you access frequently.  
+- **Cost:** Highest storage cost, lowest access cost.  
+- **Use case:** Active apps, logs, database backups you read often.  
+
+**Example:**  
+You have a web app storing user profile images or recent files. Users access them multiple times a day.  
+
+- **Storage cost:** Higher per GB  
+- **Access cost:** Minimal  
+
+**Analogy:** Hot tier = your desktop files you use every day.
+
+---
+
+## 2️⃣ Cool Tier ❄️
+
+- **Purpose:** Data you access less frequently (maybe once a month).  
+- **Cost:** Lower storage cost than Hot, higher access cost.  
+- **Use case:** Backups, old logs, archived project files that you rarely read.  
+
+**Example:**  
+Your company stores last year’s financial reports or logs from 3–6 months ago. You rarely need to read them, but they must be available if needed.  
+
+- **Storage cost:** Cheaper than Hot  
+- **Access cost:** Higher if you read frequently  
+
+**Analogy:** Cool tier = files in an external hard drive you check monthly.
+
+---
+
+## 3️⃣ Archive Tier 🗄️
+
+- **Purpose:** Data you rarely access (maybe once a year).  
+- **Cost:** Cheapest storage cost, highest access cost and retrieval time.  
+- **Use case:** Compliance, old backups, old audit logs, rarely-read data.  
+
+**Example:**  
+Your company must store tax records for 7 years. Nobody reads them until audit time.  
+
+- **Storage cost:** Very cheap  
+- **Access cost:** Very high (retrieval can take hours)  
+
+**Analogy:** Archive tier = warehouse storage for old boxes. You pay little, but it takes time to get them.
+
+---
+
+## 🔹 Comparison Table
+
+| Tier    | Storage cost | Access cost | Latency   | Example                                |
+|--------|--------------|------------|-----------|----------------------------------------|
+| Hot    | High         | Low        | Immediate | Active user files, current logs        |
+| Cool   | Medium       | Medium     | Immediate | 6-month-old backups, old logs          |
+| Archive| Very low     | Very high  | Hours     | 7-year tax records, compliance backups |
+
+---
+
+## 💡 Pro Tips
+
+- **Use lifecycle rules** to automatically move data:
+  - Hot → Cool → Archive based on age  
+- **Choose tier based on access pattern** to optimize costs.
+
