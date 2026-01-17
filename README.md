@@ -136,4 +136,5 @@ az aks get-credentials \
   --name cluster-name
 
 ```
+- https://medium.com/@h.stoychev87/aks-cluster-creation-explained-9dccddfbb80e
 
