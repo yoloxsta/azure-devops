@@ -62,7 +62,7 @@ This README explains the **Hot, Cool, and Archive tiers** in Azure Blob Storage,
 
 ---
 
-## 1️⃣ Hot Tier 🌞
+## 1️⃣ Hot Tier 
 
 - **Purpose:** Data you access frequently.  
 - **Cost:** Highest storage cost, lowest access cost.  
@@ -78,7 +78,7 @@ You have a web app storing user profile images or recent files. Users access the
 
 ---
 
-## 2️⃣ Cool Tier ❄️
+## 2️⃣ Cool Tier 
 
 - **Purpose:** Data you access less frequently (maybe once a month).  
 - **Cost:** Lower storage cost than Hot, higher access cost.  
@@ -94,7 +94,7 @@ Your company stores last year’s financial reports or logs from 3–6 months ag
 
 ---
 
-## 3️⃣ Archive Tier 🗄️
+## 3️⃣ Archive Tier 
 
 - **Purpose:** Data you rarely access (maybe once a year).  
 - **Cost:** Cheapest storage cost, highest access cost and retrieval time.  
