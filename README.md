@@ -137,4 +137,5 @@ az aks get-credentials \
 
 ```
 - https://medium.com/@h.stoychev87/aks-cluster-creation-explained-9dccddfbb80e
+- https://medium.com/@eniola-ajala/how-to-deploy-your-website-on-azure-app-service-44d5f18cd842
 
