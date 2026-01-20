@@ -61,7 +61,6 @@ You must NOT rely on venv for Azure DevOps agents
 This README explains the **Hot, Cool, and Archive tiers** in Azure Blob Storage, including cost, use cases, examples, and analogies.
 
 ---
-
 ## 1️⃣ Hot Tier 
 
 - **Purpose:** Data you access frequently.  
