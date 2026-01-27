@@ -236,4 +236,46 @@ So:
 Storage Account → aksstorage12345
 
 File Share → pvc-abcde
+====
+=> Get the Storage Account Key (required for VM mount)
+
+Run on your Azure VM:
+
+az storage account keys list \
+  --resource-group RG-Name \
+  --account-name wxyz \
+  -o table
+
+
+Copy key1.
+
+=> Mount Azure File on your VM
+Install CIFS (if not installed)
+sudo apt update
+sudo apt install -y cifs-utils
+
+Create mount directory
+sudo mkdir -p /mnt/azurefile
+
+Mount command
+sudo mount -t cifs \
+ //wxyz.file.core.windows.net/pvc- \
+ /mnt/azurefile \
+ -o vers=3.0,username=wxyz,password=<STORAGE_KEY>,dir_mode=0777,file_mode=0777,serverino
+
+
+(Replace <STORAGE_KEY> with the real key)
+
+=> Verify (important test)
+
+From VM:
+
+ls /mnt/azurefile
+cat /mnt/azurefile/from-pod.txt
+
+
+You should see:
+
+Hello from AKS Pod
 ```
+
