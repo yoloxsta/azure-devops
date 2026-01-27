@@ -278,4 +278,12 @@ You should see:
 
 Hello from AKS Pod
 ```
+## Enable kubectl completion
+```
+For Bash
+# 1. Load completion in current shell
+source <(kubectl completion bash)
 
+# 2. Optional: add to your .bashrc to persist across sessions
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+```
