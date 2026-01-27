@@ -138,3 +138,102 @@ az aks get-credentials \
 - https://medium.com/@h.stoychev87/aks-cluster-creation-explained-9dccddfbb80e
 - https://medium.com/@eniola-ajala/how-to-deploy-your-website-on-azure-app-service-44d5f18cd842
 
+## AKS-Azure File (CSI)
+### Azure File (CSI) PV / PVC — Full Step-by-Step Lab (AKS + VM)
+
+```
+Goal
+====
+- Use Azure File
+- Mount it inside a Pod
+- Mount the same share on your Azure VM
+- Verify file sharing works
+====
+STEP-1 Create Azure File PVC (Dynamic Provisioning)
+
+AKS already has this StorageClass:
+
+azurefile-csi
+
+Create PVC only (PV will be auto-created).
+
+=> azurefile-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: azurefile-pvc
+  namespace: hello
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azurefile-csi
+  resources:
+    requests:
+      storage: 5Gi
+
+
+Apply:
+kubectl apply -f azurefile-pvc.yaml
+
+Check:
+kubectl get pvc -n hello
+You should see:
+
+STATUS: Bound
+
+STEP-2️ Create a Pod that uses Azure File
+=> azurefile-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: azurefile-test-pod
+  namespace: hello
+spec:
+  containers:
+  - name: app
+    image: busybox
+    command: [ "sh", "-c", "sleep 3600" ]
+    volumeMounts:
+    - name: azurefile
+      mountPath: /data
+  volumes:
+  - name: azurefile
+    persistentVolumeClaim:
+      claimName: azurefile-pvc
+
+
+Apply:
+kubectl apply -f azurefile-pod.yaml
+Check:
+
+kubectl get pod -n hello
+
+STEP-3️ Write data from inside the Pod
+kubectl exec -it azurefile-test-pod -n hello -- sh
+
+Inside pod:
+
+echo "Hello from AKS Pod" > /data/from-pod.txt
+ls /data
+
+
+✅ File created in Azure File Share
+
+STEP-4️ Get Azure Storage Account details (VERY IMPORTANT)
+
+Find the storage account created by AKS:
+kubectl get pv | grep azurefile
+Then:
+
+kubectl describe pv <pv-name>
+
+Look for:
+volumeHandle: <storageAccount>#<shareName>
+Example:
+volumeHandle: aksstorage12345#pvc-abcde
+So:
+
+Storage Account → aksstorage12345
+
+File Share → pvc-abcde
+```
