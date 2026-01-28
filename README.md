@@ -287,3 +287,59 @@ source <(kubectl completion bash)
 # 2. Optional: add to your .bashrc to persist across sessions
 echo "source <(kubectl completion bash)" >> ~/.bashrc
 ```
+## Cert
+```
+- kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.16.0/cert-manager.yaml
+
+=> cluster-issuer.yaml
+
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: example.com    # <-- your email
+    privateKeySecretRef:
+      name: letsencrypt-prod-key
+    solvers:
+    - http01:
+        ingress:
+          class: azure/application-gateway
+
+====
+=> ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-ingress
+  namespace: hello
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: azure-application-gateway
+  tls:
+  - hosts:
+    - akstest.example.com
+    secretName: hello-tls
+  rules:
+  - host: akstest.example.com
+    http:
+      paths:
+      - path: /hello
+        pathType: Prefix
+        backend:
+          service:
+            name: hello-svc
+            port:
+              number: 80
+      - path: /bye
+        pathType: Prefix
+        backend:
+          service:
+            name: bye-svc
+            port:
+              number: 80
+
+```
