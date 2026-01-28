@@ -343,3 +343,4 @@ spec:
               number: 80
 
 ```
+- https://joeloduyemi.hashnode.dev/how-to-install-argocd-on-an-aks-cluster
